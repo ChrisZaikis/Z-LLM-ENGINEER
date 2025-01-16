@@ -1,8 +1,4 @@
 
-
-## Welcome!
-
-
 ## What happend to the original ChatGPT Wrapper project?
 
 See [CHATGPT_WRAPPER.md](CHATGPT_WRAPPER.md)
