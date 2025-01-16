@@ -1,29 +1,5 @@
 
 
-<p align="center">
-  <img alt="lwe-logo-small" src="https://github.com/llm-workflow-engine/llm-workflow-engine/assets/43772/6921deac-0964-41a9-84fd-7c2ebce198c0" />
-</p>
-
-<h1>
-  <p align="center">
-    LLM Workflow Engine
-  </p>
-</h1>
-
-<p id="summary-header" align="center">LLM Workflow Engine (LWE) is a <b>Power CLI</b> and <b>Workflow manager</b> for LLMs.</p>
-
-<h4 id="documentation" align="center">
-  <a href="https://llm-workflow-engine.readthedocs.io" target="_blank">
-    Read the documentation
-  </a>
-</h4>
-
-<h4 id="intro-video" align="center">
-  <a href="https://www.youtube.com/watch?v=-FiYQiS5nY4" target="_blank">
-    WATCH INTRO VIDEO
-  </a>
-</h4>
-
 ## Welcome!
 
 What would you like to do?
