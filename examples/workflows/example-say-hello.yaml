@@ -1,0 +1,13 @@
+---
+# Simple connectivity test to the LLM.
+- name: Say hello
+  hosts: localhost
+  gather_facts: no
+  tasks:
+    - name: Say hello
+      lwe_llm:
+        message: "Say hello"
+      register: result
+    - name: Display response
+      debug:
+        var: result

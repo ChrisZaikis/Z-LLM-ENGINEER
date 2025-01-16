@@ -1,0 +1,45 @@
+# This file is included in the example-iterative.yaml workflow.
+#
+# Separating it out allows the file to include itself for infinite loops
+# until the user indicates they are done.
+- name: Give the LLM a task, or done
+  lwe_input:
+    prompt: "Give the LLM a task, or enter 'done' to finish"
+  register: llm_task
+
+# This block handles the primary actions if the user gave the LLM a task.
+# If they entered 'done', it's skipped.
+- block:
+
+  - name: "Perform LLM query: {{ llm_task.user_input }}"
+    lwe_llm:
+      message: "{{ llm_task.user_input }}"
+    register: llm_output
+
+  - name: Display response
+    debug:
+      var: llm_output
+
+  - name: Gather facts (updates Ansible timestamp)
+    ansible.builtin.setup:
+
+  - name: Get task output filename
+    command: echo "{{ file_storage_dir }}/llm-task-output-{{ ansible_date_time.epoch_int }}.txt"
+    register: task_output_filename
+
+  - name: "Save LLM task/output to file: {{ task_output_filename.stdout }}"
+    copy:
+      content: |-
+        TASK:
+
+        {{ llm_task.user_input }}
+
+        RESPONSE:
+
+        {{ llm_output.response }}
+      dest: "{{ task_output_filename.stdout }}"
+
+  - name: "Performing next task"
+    include_tasks: example-iterative-task.yaml
+
+  when: llm_task.user_input | lower | trim not in ['done', 'complete', 'finished', 'quit', 'exit']

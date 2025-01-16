@@ -1,0 +1,54 @@
+---
+# A more advanced example of the workflow system.
+#
+# A series of requests is made to the LLM, which requires the LLM to:
+#
+# 1. Answer a question
+# 2. Provide feedback on the answer, including recommendations for improvement
+# 3. Provide a new answer based on the feedback
+- name: Ask the LLM a question, get feedback on answer, provide new answer based on feedback
+  hosts: localhost
+  gather_facts: no
+  vars:
+    profile: default
+  vars_prompt:
+    - name: question
+      prompt: "Enter a question for the LLM"
+      private: false
+  tasks:
+    - name: "Ask question: {{ question }}"
+      lwe_llm:
+        message: "{{ question }}"
+        profile: "{{ profile }}"
+      register: answer
+    - name: Display answer
+      debug:
+        var: answer
+    - name: "Critical feedback on answer to question: {{ question }}"
+      lwe_llm:
+        message: |-
+          Given this question: {{ question }}
+
+          Provide critical feedback on this answer to the question: {{ answer.response }}
+
+          In the feedback, include at least three recommendations that can be incorporated to improve the answer.
+        profile: "{{ profile }}"
+      register: feedback
+    - name: Display feedback
+      debug:
+        var: feedback
+    - name: New answer after feedback
+      lwe_llm:
+        message: |-
+          Given this question: {{ question }}
+
+          Given this answer to the question: {{ answer.response }}
+
+          Given this feedback on the answer to the question: {{ feedback.response }}
+
+          Provide a new answer to the question that incorporates the feedback"
+        profile: "{{ profile }}"
+      register: answer_after_feedback
+    - name: Display new answer after feedback
+      debug:
+        var: answer_after_feedback

@@ -1,0 +1,20 @@
+---
+# Ask a question to the LLM, get an answer
+#
+# Illustrates prompting the user for information before running the workflow.
+- name: Ask the LLM a question
+  hosts: localhost
+  gather_facts: false
+
+  tasks:
+    - name: Collect question
+      lwe_input:
+        prompt: "Enter a question for the LLM"
+      register: question
+    - name: "Ask question: {{ question.user_input }}"
+      lwe_llm:
+        message: "{{ question.user_input }}"
+      register: result
+    - name: Display response
+      debug:
+        var: result
