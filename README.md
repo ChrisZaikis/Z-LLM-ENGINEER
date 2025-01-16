@@ -2,19 +2,6 @@
 
 ## Welcome!
 
-What would you like to do?
-
-* [Learn about the project](https://llm-workflow-engine.readthedocs.io)
-* [Install LWE](https://llm-workflow-engine.readthedocs.io/en/latest/installation.html)
-* [Learn how to use it](https://llm-workflow-engine.readthedocs.io/en/latest/how_it_works.html)
-* [Read the documentation](https://llm-workflow-engine.readthedocs.io)
-* [Learn more about configuration/features](https://llm-workflow-engine.readthedocs.io/en/latest/configuration.html)
-* [Troubleshoot common issues](https://llm-workflow-engine.readthedocs.io/en/latest/troubleshooting.html)
-* [Upgrade LWE](https://llm-workflow-engine.readthedocs.io/en/latest/upgrading.html)
-* [Using GPT4](https://llm-workflow-engine.readthedocs.io/en/latest/model_access.html#gpt4)
-* [Report a bug](ISSUES.md)
-* [Get support](SUPPORT.md)
-
 
 ## What happend to the original ChatGPT Wrapper project?
 
