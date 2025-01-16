@@ -30,14 +30,6 @@ ChatGPT Wrapper was an amazing tool for its time, thank you to its original crea
 
 💻  **Supports official ChatGPT API**. Make API calls directly to the OpenAI ChatGPT endpoint (all supported models accessible by your OpenAI account)
 
-🔌 [**Simple plugin architecture**](https://llm-workflow-engine.readthedocs.io/en/latest/plugins.html#core-plugins). Extend LWE with custom functionality
-
-🗣 **Supports multiple LLM providers**. Provider plugins allow interacting with other LLMs (GPT-3, Cohere, Hugginface, etc.)
-
-🔄[**Build workflows**](https://llm-workflow-engine.readthedocs.io/en/latest/workflows.html). Easily integrate calls to an LLM into larger workflows via Ansible Playbooks
-
-🔧 [**Tool use**](https://llm-workflow-engine.readthedocs.io/en/latest/tools.html). (for supported providers)
-
 🐳 **Docker image**. LWE is also available as a docker image. (experimental)
 
 🐍**Python API**. LWE also has a Python library that lets you use ChatGPT/GPT4 in your Python scripts.
