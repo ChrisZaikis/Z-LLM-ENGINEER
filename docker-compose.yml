@@ -1,0 +1,15 @@
+version: '3.9'
+services:
+  llm-workflow-engine:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    container_name: lwe-container
+    # restart: always
+    volumes:
+      - ./:/src
+      - ./tmp:/tmp
+    environment:
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - EDITOR=vim
+    command: "bash /src/docker-entrypoint.sh" # Run the entrypoint script

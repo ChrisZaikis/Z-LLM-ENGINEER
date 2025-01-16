@@ -1,0 +1,169 @@
+# DO NOT SIMPLY COPY AND PASTE THIS CONFIGURATION FILE!
+# It is a reference for the default configuration. The correct way to
+# do it is to ONLY include the values in your configuration that you
+# want to override.
+
+# Configuration syntax is YAML, learn more at: https://yaml.org
+
+
+##########################################################
+# Backend settings.
+##########################################################
+# The backend the shell should use. For now, this should always be: api
+backend: api
+# Additional options to pass to the backend.
+backend_options:
+  # If set to a string, and no users currently exist in the database,
+  # a user will be created with this name and no password or email.
+  auto_create_first_user: None
+  # Load this user when bootstrapping the backend. Can be user_id or username.
+  default_user: None
+  # Load this conversation when bootstrapping the backend. Must be an existing conversation id.
+  default_conversation_id: None
+  # Options for title generation.
+  title_generation:
+    # Use a different provider for generating titles.
+    # The default is chat_openai.
+    # If an alternate provider is set, the default model will be used for the generation.
+    provider: None
+    # Specify the model used for title generation. Only used if 'provider' is set.
+    model: None
+
+# The database connection string, in a format SQLAlchemy understands.
+# DO NOT USE THE LINE AS IT IS WRITTEN BELOW, IT ONLY ILLUSTRATES THE DEFAULT LOCATION.
+# database: sqlite:////home/[username]/.local/share/llm-workflow-engine/profiles/default/storage.db
+
+
+
+##########################################################
+# Directory settings.
+##########################################################
+# Customize user directory locations.
+#
+# Directories are scanned by their order in the list. System directories for these
+# settings are automatically included and are searched with the lowest priority.
+#
+# For presets and workflows, later files with the same name override earlier ones.
+# For plugins and templates, first found wins.
+#
+# The following token are available:
+# - $HOME: The user's home directory
+# - $CONFIG_DIR: The configuration directory
+# - $PROFILE: The active profile
+directories:
+  templates:
+    # New templates created in the CLI are saved to the first directory in the list.
+    - $CONFIG_DIR/profiles/$PROFILE/templates
+    - $CONFIG_DIR/templates
+  presets:
+    - $CONFIG_DIR/presets
+    # New presets created in the CLI are saved to the last directory in the list.
+    - $CONFIG_DIR/profiles/$PROFILE/presets
+  plugins:
+    - $CONFIG_DIR/profiles/$PROFILE/plugins
+    - $CONFIG_DIR/plugins
+  workflows:
+    - $CONFIG_DIR/workflows
+    # New workflows created in the CLI are saved to the last directory in the list.
+    - $CONFIG_DIR/profiles/$PROFILE/workflows
+
+
+##########################################################
+# Shell settings.
+##########################################################
+shell:
+  # Customize the prompt prefix, the following token are available:
+  # - $SYSTEM_MESSAGE_ALIAS: The current your system message alias
+  # - $USER: Logged in username
+  # - $MODEL: The LLM model name
+  # - $PRESET_OR_MODEL: The active preset if set, or the LLM model name
+  # - $NEWLINE: Insert a newline
+  # - $TEMPERATURE: The current temperature
+  # - $MAX_SUBMISSION_TOKENS: The maximum number of tokens in a submission
+  # - $CURRENT_CONVERSATION_TOKENS: The token count of the current conversation (only supported for chat models)
+  prompt_prefix: '($TEMPERATURE/$MAX_SUBMISSION_TOKENS/$CURRENT_CONVERSATION_TOKENS): $SYSTEM_MESSAGE_ALIAS$NEWLINE$USER@$PRESET_OR_MODEL'
+  # Full path to the file that stores a history of commands in the shell.
+  # Set to false to disable storing history.
+  history_file: /tmp/repl_history.log
+
+
+##########################################################
+# Model settings.
+##########################################################
+model:
+  # The preset to use on startup.
+  # See '/help presets' for more information.
+  default_preset: null
+  # The alias name of the system message to use on startup.
+  # Can be 'default' for the default system message, or another
+  # alias name defined in the 'system_message' section.
+  default_system_message: default
+  # If true, responses will be streamed in real time (no markdown formatting).
+  # By default, streaming is enabled in the REPL for supported providers, and
+  # disabled otherwise.
+  streaming: true
+  # Configure aliases to switch between system messages, key is alias, value is message.
+  # NOTE: This setting is only active for chat models.
+  # See '/help system_message' for more information.
+  system_message:
+    programmer: "You are an expert programmer, who responds to questions with brief examples in code."
+
+
+##########################################################
+# Chat settings.
+##########################################################
+chat:
+  # Chat logs.
+  log:
+    # Enable logging to a file.
+    enabled: false
+    # Full path to the log file.
+    filepath: lwe.log
+
+
+##########################################################
+# Log settings.
+##########################################################
+log:
+  # Console logging.
+  console:
+    # Message format.
+    format: '%(name)s - %(levelname)s - %(message)s'
+    # Message level (must be valid Python logging module level).
+    level: ERROR
+
+
+##########################################################
+# Plugin settings.
+# See the README for more informaiton on plugins.
+##########################################################
+plugins:
+  enabled:
+    # Core plugins, see README for more details.
+    - echo
+    - examples
+    #- awesome
+    #- database
+    #- data_query
+    #- shell
+    #- zap
+    # Core provider plugins, see README for more details.
+    #- provider_ai21
+    #- provider_cohere
+    #- provider_huggingface_hub
+    #- provider_openai
+
+##########################################################
+# Debug settings.
+##########################################################
+debug:
+  # Debug logging.
+  log:
+    # Enable to log debug messages.
+    enabled: false
+    # Full path to the log file.
+    filepath: /tmp/lwe-debug.log
+    # Message format.
+    format: '%(name)s - %(asctime)s - %(levelname)s - %(message)s'
+    # Message level (must be valid Python logging module level).
+    level: DEBUG
