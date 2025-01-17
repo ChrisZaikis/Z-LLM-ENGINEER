@@ -1,9 +1,7 @@
 
 ## What happend to the original ChatGPT Wrapper project?
 
-See [CHATGPT_WRAPPER.md](CHATGPT_WRAPPER.md)
-
-ChatGPT Wrapper was an amazing tool for its time, thank you to its original creator [mmabrouk](https://github.com/mmabrouk) for all your hard work, it lives on in a new form :)
+ChatGPT Wrapper was an amazing tool!
 
 ## Highlights
 
